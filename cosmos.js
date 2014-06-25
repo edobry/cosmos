@@ -42,7 +42,7 @@ var db = (function() {
 	return exports;	
 })();
 
-for(var i = 0; i < 100000; i++) {
+for(var i = 0; i < 100; i++) {
 	debugger;
 	console.log(db.genId());
 }

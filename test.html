@@ -4,7 +4,7 @@
 	<script type="text/javascript" src="graph.js" /></script>
 </head>
 <body>
-	<canvas style="position:absolute;top:0;left:0;border:1px solid black;	" width=500 height=500></canvas>
+	<canvas style="position:absolute;top:0;left:0;border:1px solid black;" width=500 height=500></canvas>
 	<script type="text/javascript">
 		$(function(){
 			var canvas = $("canvas");
@@ -25,9 +25,36 @@
 				var x = Math.random()*300 + 100;
 				var y = Math.random()*300 + 100;
 				drawCircle(x, y, 15);
+
+				for(var i in node.connections){
+					var neighbor = node.connections[i];
+					var coords = drawNode(neighbor);
+
+					ctx.beginPath();
+					ctx.moveTo(x, y);
+					ctx.lineTo(coords.x, coords.y);
+					ctx.stroke();
+				}
+
 				ctx.strokeText(node.id, x-Math.round(ctx.measureText(node.id).width/2), y+3);
+
+				return {x: x, y: y};
 			};
-			// debugger;
+
+			var node1 = new Node(2, "");
+			var node2 = new Node(3, "", [node1]);
+			var node3 = new Node(5, "", [node1, node2]);
+			var node4 = new Node(7, "", [node1, node2, node3]);
+
+			var nodes = [];
+			nodes.push(node1);
+			nodes.push(node2);
+			nodes.push(node3);
+			nodes.push(node4);
+
+			drawNode(node4);
+
+			//nodes.forEach(drawNode);
 		});
 	</script>
 </body>
