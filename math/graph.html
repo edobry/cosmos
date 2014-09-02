@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>graph</title>
+	<script src="graph.js"></script>
+	<script src="bower_components/jquery/dist/jquery.js"></script>
+</head>
+<body>
+	<label for="size">Size</label>
+	<input id="size" type="number"/>
+
+	<div id="output"/>
+
+	<script type="text/javascript">
+		var G;
+
+		var init = function(size) {
+			G = new CGraph();
+			for(var i = 0; i < size; i++) {
+				G.addNode(new Node()); 
+			}
+		};
+
+		$(function(){
+			var size = $("#size");
+			size.keydown(function (e){
+			    if(e.keyCode == 13){
+			        init(size.val());
+
+					$("#output").text(
+						"Vertices: " + G.n() + 
+						"Edges: " + G.numEdges()
+					);
+			    }
+			});
+		});
+	</script>
+</body>
+</html>
