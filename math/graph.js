@@ -10,11 +10,15 @@ distinct = function(arr) {
 };
 
 Set = function(arr) {
-  return distinct(arr);
+  var elements = arr ? distinct(arr) : [];
+  var exports = {};
+
+  return exports;
 };
 
 CGraph = function() {
-  var nodes = [];
+  var nodes = new Set();
+  var edges = new Set();
   var exports = {};
 
   // properties
@@ -49,17 +53,15 @@ CGraph = function() {
     return nodes.push(node);
   };
 
+  var connect = exports.connect = function(n1, n2) {
+    return edges.push({ nodes: new Set([n1, n2]) });
+  }
+
   return exports;
 };
 
 Node = function() {
   var exports = {};
-
-  var connections = [];
-
-  var connect = exports.connect = function(node) {
-    return connections.push(node);
-  };
 
   return exports;
 };
